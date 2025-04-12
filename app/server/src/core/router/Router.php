@@ -8,11 +8,19 @@ final class Router
 
 	public function setRoute(string $uri, string $httpMethod, array $request): void
 	{
-
+		$this->routes["$httpMethod $uri"] = [
+			'handler' => new $request['handler'](),
+			'method' => $request['method']
+		];
 	}
 
 	public function dispatchRoutes(string $uri, string $httpMethod): void
 	{
 
+	}
+
+	public function dumpObject()
+	{
+		print_r($this);
 	}
 }
