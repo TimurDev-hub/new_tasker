@@ -1,0 +1,17 @@
+{
+	"name": "timur/task_tracker",
+	"description": "None",
+	"type": "project",
+	"license": "MIT",
+	"minimum-stability": "stable",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Database\\": "app/server/src/core/db/",
+			"Router\\": "app/server/src/core/router/",
+			"Controllers\\": "app/server/src/modules/controllers/",
+			"Models\\": "app/server/src/modules/models/",
+			"Utils\\": "app/server/src/utils/"
+		}
+	}
+}

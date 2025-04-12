@@ -1,0 +1,19 @@
+# Application enviroment;
+.env
+
+# JavaScript dependencies;
+node_modules/
+package-lock.json
+
+# PHP dependencies;
+vendor/
+composer.lock
+
+# Mapping files;
+*.map
+
+# Tailwind config file;
+tailwind.config.js
+
+# Tailwind input file;
+app/client/css/tailwind.css
