@@ -10,8 +10,10 @@ final class Database
 
 	public static function connection(): \PDO
 	{
+		['DB_HOST' => $host, 'DB_PORT' => $port, 'DB_NAME' => $db, 'DB_USER' => $user, 'DB_PASS' => $pass] = Parser::loadEnv();
+
 		try {
-			self::$pdo = new \PDO(dsn: "pgsql:host=\$host;port=\$port;dbname=\$db;user=\$user;password=\$pass");
+			self::$pdo = new \PDO(dsn: "pgsql:host=$host;port=$port;dbname=$db;user=$user;password=$pass");
 			self::$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			return self::$pdo;
 
