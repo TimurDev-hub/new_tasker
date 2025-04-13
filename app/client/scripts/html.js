@@ -1,8 +1,10 @@
-export class html {
+export class Html {
 	static basicHeader() {
 		return `
 			<header class="flex justify-between items-center w-full bg-zinc-700 mt-4 rounded-2xl px-12 py-4">
-				<span class="inline-block mx-4 text-5xl text-white font-medium">The new "Tasker"&copy;</span>
+				<span class="inline-block mx-4 text-5xl text-white font-medium">
+					The new "Tasker"&copy;
+				</span>
 				<div>
 					<ul class="flex">
 						<li>

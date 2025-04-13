@@ -1,5 +1,6 @@
-import { html } from "./html.js";
+import { Html } from "./html.js";
+import { Http } from "./http.js";
 
 const root = document.getElementById('root');
 
-root.innerHTML = html.basicHeader();
+root.innerHTML = Html.basicHeader();
