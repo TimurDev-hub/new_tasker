@@ -6,7 +6,6 @@ export class Http {
 				'Content-Type': 'application/json'
 			}
 		});
-
 		const responseData = await response.json();
 		return responseData;
 	}
@@ -19,7 +18,6 @@ export class Http {
 			},
 			body: jsonData
 		});
-
 		const responseData = await response.json();
 		return responseData;
 	}
@@ -31,7 +29,6 @@ export class Http {
 				'Content-Type': 'application/json'
 			}
 		});
-
 		const responseData = await response.json();
 		return responseData;
 	}
