@@ -20,7 +20,7 @@ $router->setRoute(uri: '/api/user', httpMethod: 'POST', request: [
 	'method' => 'create'
 ]);
 
-$router->setRoute(uri: '/api/task', httpMethod: 'GET', request: [
+$router->setRoute(uri: '/api/task/{id}', httpMethod: 'GET', request: [
 	'handler' => TaskController::class,
 	'method' => 'index'
 ]);
