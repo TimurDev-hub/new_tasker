@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
-use Router\Router;
+namespace Router;
+
 use Controllers\{AuthController, TaskController, UserController};
-
-$router = new Router;
 
 $router->setRoute(uri: '/api/auth', httpMethod: 'POST', request: [
 	'handler' => AuthController::class,
@@ -25,7 +24,7 @@ $router->setRoute(uri: '/api/task/{id}', httpMethod: 'GET', request: [
 	'method' => 'index'
 ]);
 
-$router->setRoute(uri: '/api/task/{id}', httpMethod: 'DELETE', request: [
+$router->setRoute(uri: '/api/task?uid={id}&tid={id}', httpMethod: 'DELETE', request: [
 	'handler' => TaskController::class,
 	'method' => 'delete'
 ]);

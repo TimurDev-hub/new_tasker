@@ -16,7 +16,7 @@ final class Router
 
 	public function dispatchRoutes(string $uri, string $httpMethod): void
 	{
-
+		$routeKey = "$httpMethod $uri";
 	}
 
 	public function dumpObject()
