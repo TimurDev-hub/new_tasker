@@ -2,7 +2,20 @@
 
 namespace Controllers;
 
-class TaskController extends __Controller
+final class TaskController extends BaseController
 {
-	
+	public function create(): void
+	{
+
+	}
+
+	public function index(): void
+	{
+
+	}
+
+	public function delete(): void
+	{
+		
+	}
 }
