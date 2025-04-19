@@ -24,7 +24,12 @@ $router->setRoute(uri: '/api/task/{id}', httpMethod: 'GET', request: [
 	'method' => 'index'
 ]);
 
-$router->setRoute(uri: '/api/task?uid={id}&tid={id}', httpMethod: 'DELETE', request: [
+$router->setRoute(uri: '/api/auth/{id}', httpMethod: 'DELETE', request: [
+	'handler' => AuthController::class,
+	'method' => 'delete'
+]);
+
+$router->setRoute(uri: '/api/task?user={id}&task={id}', httpMethod: 'DELETE', request: [
 	'handler' => TaskController::class,
 	'method' => 'delete'
 ]);
