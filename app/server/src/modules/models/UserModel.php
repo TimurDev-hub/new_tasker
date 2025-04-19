@@ -4,7 +4,7 @@ namespace Models;
 
 use Utils\Logger;
 
-final class UserModel extends __Model
+final class UserModel
 {
 	private \PDO $pdo;
 
@@ -13,10 +13,18 @@ final class UserModel extends __Model
 		$this->pdo = $pdo;
 	}
 
+	public function validateUserData(array $data): bool
+	{
+		foreach ($data as $item) {
+			if (str_contains($item, ' ')) return false;
+		}
+		return true;
+	}
+
 	public function findAccount(string $username): bool
 	{
 		try {
-			$stmt = $this->pdo->prepare("SELECT 1 FROM users WHERE user_name =? LIMIT 1");
+			$stmt = $this->pdo->prepare("SELECT 1 FROM users WHERE user_name = ? LIMIT 1");
 			$stmt->execute([$username]);
 			return (bool) $stmt->fetchColumn();
 
@@ -26,16 +34,13 @@ final class UserModel extends __Model
 		}
 	}
 
-	public function createAccount(array $data): bool
+	public function createAccount(string $username, string $password): bool
 	{
-		if (!$this->validateText(data: [$data['user_name'], $data['user_password']])) return false;
-		if ($this->findAccount(username: $data['user_name'])) return false;
-
-		$password = password_hash($data['user_password'], PASSWORD_DEFAULT);
+		$password = password_hash($password, PASSWORD_DEFAULT);
 
 		try {
 			$stmt = $this->pdo->prepare("INSERT INTO users (user_name, user_password) VALUES(?, ?)");
-			return $stmt->execute([$data['user_name'], $password]);
+			return $stmt->execute([$username, $password]);
 
 		} catch (\PDOException $exc) {
 			Logger::handleError(exc: $exc, file: Logger::USER_FILE);
@@ -43,13 +48,11 @@ final class UserModel extends __Model
 		}
 	}
 
-	public function loginAccount(array $data): bool
+	public function loginAccount(string $username, string $password): bool
 	{
-		if (!$this->validateText(data: [$data['user_name'], $data['user_password']])) return false;
-
 		try {
 			$stmt = $this->pdo->prepare("SELECT user_id, user_name, user_password FROM users WHERE user_name = ? AND user_password = ? LIMIT 1");
-			$stmt->execute([$data['user_name'], $data['user_password']]);
+			$stmt->execute([$username, $password]);
 			return $stmt->fetch(\PDO::FETCH_ASSOC);
 
 		} catch (\PDOException $exc) {
@@ -60,8 +63,6 @@ final class UserModel extends __Model
 
 	public function deleteAccount(int $userId): bool
 	{
-		if (!$this->validateId(data: [$userId])) return false;
-
 		try {
 			$this->pdo->beginTransaction();
 

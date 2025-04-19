@@ -4,7 +4,7 @@ namespace Models;
 
 use Utils\Logger;
 
-final class TaskModel extends __Model
+final class TaskModel
 {
 	private \PDO $pdo;
 
@@ -15,8 +15,6 @@ final class TaskModel extends __Model
 
 	public function countTasks(int $userId): int|false
 	{
-		if (!$this->validateId(data: [$userId])) return false;
-
 		try {
 			$stmt = $this->pdo->prepare("SELECT COUNT(task_id) FROM tasks WHERE user_id = ?");
 			$stmt->execute([$userId]);
@@ -28,14 +26,11 @@ final class TaskModel extends __Model
 		}
 	}
 
-	public function createTask(int $userId, array $data): bool
+	public function createTask(int $userId, string $taskTitle, string $taskContent): bool
 	{
-		if (!$this->validateId(data: [$userId])) return false;
-		if (!$this->validateText(data: [$data['task_title'], $data['task_content']])) return false;
-
 		try {
 			$stmt = $this->pdo->prepare("INSERT INTO tasks (user_id, task_title, task_content) VALUES(?, ?, ?)");
-			return $stmt->execute([$userId, $data['task_title'], $data['task_content']]);
+			return $stmt->execute([$userId, $taskTitle, $taskContent]);
 
 		} catch (\PDOException $exc) {
 			Logger::handleError(exc: $exc, file: Logger::TASK_FILE);
@@ -45,8 +40,6 @@ final class TaskModel extends __Model
 
 	public function getTasks(int $userId): array|false
 	{
-		if (!$this->validateId(data: [$userId])) return false;
-
 		try {
 			$stmt = $this->pdo->prepare("SELECT task_id, task_title, task_content WHERE user_id = ?");
 			$stmt->execute([$userId]);
@@ -60,8 +53,6 @@ final class TaskModel extends __Model
 
 	public function deleteTask(int $userId, int $taskId): bool
 	{
-		if (!$this->validateId(data: [$userId, $taskId])) return false;
-
 		try {
 			$stmt = $this->pdo->prepare("DELETE FROM tasks WHERE user_id = ? AND task_id = ?");
 			return $stmt->execute([$userId, $taskId]);

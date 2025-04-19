@@ -23,5 +23,6 @@ try {
 	]);
 }
 
-echo '<pre>';
+echo '<pre style="color: white;">';
 $router->dumpObject();
+echo '</pre>';

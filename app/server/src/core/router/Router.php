@@ -2,6 +2,8 @@
 
 namespace Router;
 
+use Utils\Logger;
+
 final class Router
 {
 	private array $routes = [];
