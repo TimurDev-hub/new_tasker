@@ -4,37 +4,39 @@ namespace Router;
 
 use Controllers\{AuthController, TaskController, UserController};
 
-$router->setRoute(uri: '/api/auth', httpMethod: 'POST', request: [
-	'handler' => AuthController::class,
-	'method' => 'create'
+if (!isset($router) || !is_object($router)) throw new \Error('500. Internal Server Error');
+
+$router->setRoute(httpMethod: 'POST', uri: '/api/auth', request: [
+	Router::HANDLER => AuthController::class,
+	Router::METHOD => 'create'
 ]);
 
-$router->setRoute(uri: '/api/task', httpMethod: 'POST', request: [
-	'handler' => TaskController::class,
-	'method' => 'create'
+$router->setRoute(httpMethod: 'POST', uri: '/api/task', request: [
+	Router::HANDLER => TaskController::class,
+	Router::METHOD => 'create'
 ]);
 
-$router->setRoute(uri: '/api/user', httpMethod: 'POST', request: [
-	'handler' => UserController::class,
-	'method' => 'create'
+$router->setRoute(httpMethod: 'POST', uri: '/api/user', request: [
+	Router::HANDLER => UserController::class,
+	Router::METHOD => 'create'
 ]);
 
-$router->setRoute(uri: '/api/task/{id}', httpMethod: 'GET', request: [
-	'handler' => TaskController::class,
-	'method' => 'index'
+$router->setRoute(httpMethod: 'GET', uri: '/api/task/{id}', request: [
+	Router::HANDLER => TaskController::class,
+	Router::METHOD => 'index'
 ]);
 
-$router->setRoute(uri: '/api/auth/{id}', httpMethod: 'DELETE', request: [
-	'handler' => AuthController::class,
-	'method' => 'delete'
+$router->setRoute(httpMethod: 'DELETE', uri: '/api/auth/{id}', request: [
+	Router::HANDLER => AuthController::class,
+	Router::METHOD => 'delete'
 ]);
 
-$router->setRoute(uri: '/api/task?user={id}&task={id}', httpMethod: 'DELETE', request: [
-	'handler' => TaskController::class,
-	'method' => 'delete'
+$router->setRoute(httpMethod: 'DELETE', uri: '/api/task/{user}/{task}', request: [
+	Router::HANDLER => TaskController::class,
+	Router::METHOD => 'delete'
 ]);
 
-$router->setRoute(uri: '/api/user/{id}', httpMethod: 'DELETE', request: [
-	'handler' => AuthController::class,
-	'method' => 'delete'
+$router->setRoute(httpMethod: 'DELETE', uri: '/api/user/{id}', request: [
+	Router::HANDLER => AuthController::class,
+	Router::METHOD => 'delete'
 ]);
