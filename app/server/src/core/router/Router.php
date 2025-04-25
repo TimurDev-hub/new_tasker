@@ -44,7 +44,7 @@ final class Router
 			if (!$controller instanceof BaseController) throw new \InvalidArgumentException("Controller '$controller' doesn`t correct!");
 			if (!method_exists($controller, $method)) throw new \InvalidArgumentException("Method '$method' doesn`t exist in controller '$controller'!");
 
-			echo $controller->$method();
+			echo $controller->$method($path);
 
 		} catch (\Exception $exc) {
 			Logger::handleError(exc: $exc, file: Logger::ROUTER_FILE);

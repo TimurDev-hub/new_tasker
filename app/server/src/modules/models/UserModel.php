@@ -48,11 +48,11 @@ final class UserModel
 		}
 	}
 
-	public function loginAccount(string $username, string $password): bool
+	public function loginAccount(string $username): bool
 	{
 		try {
-			$stmt = $this->pdo->prepare("SELECT user_id, user_name, user_password FROM users WHERE user_name = ? AND user_password = ? LIMIT 1");
-			$stmt->execute([$username, $password]);
+			$stmt = $this->pdo->prepare("SELECT user_id, user_name, user_password FROM users WHERE user_name = ? LIMIT 1");
+			$stmt->execute([$username]);
 			return $stmt->fetch(\PDO::FETCH_ASSOC);
 
 		} catch (\PDOException $exc) {

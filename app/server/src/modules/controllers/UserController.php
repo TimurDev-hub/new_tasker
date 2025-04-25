@@ -11,7 +11,7 @@ final class UserController extends BaseController
 	private const MIN_DATA_LEN = 4;
 	private const MAX_DATA_LEN = 16;
 
-	public function create(): string
+	public function create(?string $uri = null): string
 	{
 		$data = $this->getClientData();
 
@@ -66,7 +66,7 @@ final class UserController extends BaseController
 				'status' => 'Created successfully!'
 			]);
 
-		} catch (\Throwable $exc) {
+		} catch (\Exception $exc) {
 			Logger::handleError(exc: $exc, file: Logger::USER_FILE);
 			http_response_code(500);
 			return json_encode([
