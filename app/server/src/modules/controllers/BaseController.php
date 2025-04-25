@@ -36,7 +36,7 @@ abstract class BaseController
 
 		foreach ($data as $string) {
 			if (!is_string($string) && !is_numeric($string)) return false;
-			if (!preg_match('/^[a-z0-9\\\-_=+%@#!\/()]+$/is', $string)) return false;
+			if (!preg_match('/^[a-z0-9\-_=+%\\@#!\/()\s]+$/is', $string)) return false;
 			if (trim($string) === '') return false;
 		}
 

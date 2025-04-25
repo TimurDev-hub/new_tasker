@@ -13,7 +13,7 @@ final class UserModel
 		$this->pdo = $pdo;
 	}
 
-	public function validateData(array $data): bool
+	public function validateSpaces(array $data): bool
 	{
 		foreach ($data as $item) {
 			if (str_contains($item, ' ')) return false;

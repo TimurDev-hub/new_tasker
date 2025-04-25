@@ -36,7 +36,7 @@ final class AuthController extends BaseController
 		try {
 			$user = new UserModel(pdo: Database::connection());
 
-			if (!$user->validateData(data: $data)) {
+			if (!$user->validateSpaces(data: $data)) {
 				http_response_code(400);
 				return json_encode([
 					'reload' => false,
