@@ -23,9 +23,10 @@ try {
 		'error' => $exc->getMessage()
 	]);
 }
+
 /*
 echo '<pre style="color: white;">';
 $router->dumpObject();
-$router->dumpRoute('POST', '/api/auth');
+$router->dumpRoute('POST', '/api/user');
 echo '</pre>';
 */
