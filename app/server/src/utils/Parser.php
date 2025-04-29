@@ -8,7 +8,7 @@ final class Parser
 
 	private static function getData(): array
 	{
-		return file(self::ENV, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+		return file(self::ENV, \FILE_IGNORE_NEW_LINES | \FILE_SKIP_EMPTY_LINES);
 	}
 
 	public static function loadEnv(): array

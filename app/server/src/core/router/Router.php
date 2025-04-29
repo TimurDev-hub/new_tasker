@@ -26,7 +26,7 @@ final class Router
 
 	private function parseUri(string $uri): string
 	{
-		return parse_url(trim($uri), PHP_URL_PATH);
+		return parse_url(trim($uri), \PHP_URL_PATH);
 	}
 
 	public function dispatchRoutes(string $httpMethod, string $uri): void
