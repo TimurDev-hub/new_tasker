@@ -19,6 +19,7 @@ final class Database
 
 		} catch (\PDOException $exc) {
 			Logger::handleError(exc: $exc, file: Logger::DB_FILE);
+			throw $exc;
 		}
 	}
 }
