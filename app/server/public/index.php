@@ -17,16 +17,10 @@ try {
 
 } catch (\Throwable $exc) {
 	require_once __DIR__ . '/../../client/view/index.html';
+	header("Content-Type: application/json");
 	http_response_code(500);
 	echo json_encode([
 		'reload' => false,
 		'error' => $exc->getMessage()
 	]);
 }
-
-/*
-echo '<pre style="color: white;">';
-$router->dumpObject();
-$router->dumpRoute('POST', '/api/user');
-echo '</pre>';
-*/
