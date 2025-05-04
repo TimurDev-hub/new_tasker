@@ -7,6 +7,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-orange-600: oklch(64.6% 0.222 41.116);
     --color-yellow-300: oklch(90.5% 0.182 98.111);
     --color-yellow-600: oklch(68.1% 0.162 75.834);
     --color-green-500: oklch(72.3% 0.219 149.579);
@@ -21,6 +22,8 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
     --text-4xl: 2.25rem;
@@ -30,9 +33,7 @@
     --font-weight-medium: 500;
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
-    --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
-    --radius-3xl: 1.5rem;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -185,26 +186,8 @@
   }
 }
 @layer utilities {
-  .absolute {
-    position: absolute;
-  }
-  .relative {
-    position: relative;
-  }
   .static {
     position: static;
-  }
-  .-bottom-px {
-    bottom: -1px;
-  }
-  .bottom-px {
-    bottom: 1px;
-  }
-  .float-left {
-    float: left;
-  }
-  .float-right {
-    float: right;
   }
   .container {
     width: 100%;
@@ -233,14 +216,14 @@
   .mx-auto {
     margin-inline: auto;
   }
-  .my-4 {
-    margin-block: calc(var(--spacing) * 4);
-  }
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
   }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
+  }
+  .mt-6 {
+    margin-top: calc(var(--spacing) * 6);
   }
   .mt-20 {
     margin-top: calc(var(--spacing) * 20);
@@ -248,11 +231,8 @@
   .mr-1 {
     margin-right: calc(var(--spacing) * 1);
   }
-  .mr-2 {
-    margin-right: calc(var(--spacing) * 2);
-  }
-  .mr-4 {
-    margin-right: calc(var(--spacing) * 4);
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
   }
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
@@ -263,9 +243,6 @@
   .mb-10 {
     margin-bottom: calc(var(--spacing) * 10);
   }
-  .ml-20 {
-    margin-left: calc(var(--spacing) * 20);
-  }
   .flex {
     display: flex;
   }
@@ -275,14 +252,8 @@
   .table {
     display: table;
   }
-  .h-2 {
-    height: calc(var(--spacing) * 2);
-  }
   .h-16 {
     height: calc(var(--spacing) * 16);
-  }
-  .h-20 {
-    height: calc(var(--spacing) * 20);
   }
   .h-dvh {
     height: 100dvh;
@@ -290,17 +261,8 @@
   .h-fit {
     height: fit-content;
   }
-  .w-1 {
-    width: calc(var(--spacing) * 1);
-  }
-  .w-2 {
-    width: calc(var(--spacing) * 2);
-  }
   .w-16 {
     width: calc(var(--spacing) * 16);
-  }
-  .w-20 {
-    width: calc(var(--spacing) * 20);
   }
   .w-80 {
     width: calc(var(--spacing) * 80);
@@ -319,12 +281,6 @@
   }
   .flex-\[1_0_auto\] {
     flex: 1 0 auto;
-  }
-  .flex-\[1_1_auto\] {
-    flex: 1 1 auto;
-  }
-  .flex-\[3_1_auto\] {
-    flex: 3 1 auto;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -385,30 +341,6 @@
   .bg-zinc-950 {
     background-color: var(--color-zinc-950);
   }
-  .bg-\[url\(\)\] {
-    background-image: url();
-  }
-  .bg-\[url\(\/\)\] {
-    background-image: url(/);
-  }
-  .bg-\[url\(\/app\/\)\] {
-    background-image: url(/app/);
-  }
-  .bg-\[url\(\/app\/client\)\] {
-    background-image: url(/app/client);
-  }
-  .bg-\[url\(\/app\/client\/\)\] {
-    background-image: url(/app/client/);
-  }
-  .bg-\[url\(\/app\/client\/imgs\)\] {
-    background-image: url(/app/client/imgs);
-  }
-  .bg-\[url\(\/app\/client\/imgs\/\)\] {
-    background-image: url(/app/client/imgs/);
-  }
-  .bg-\[url\(\/app\/client\/imgs\/github\)\] {
-    background-image: url(/app/client/imgs/github);
-  }
   .bg-\[url\(\/app\/client\/imgs\/github\.svg\)\] {
     background-image: url(/app/client/imgs/github.svg);
   }
@@ -445,6 +377,10 @@
   .text-center {
     text-align: center;
   }
+  .text-2xl {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
   .text-3xl {
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
@@ -463,6 +399,12 @@
   }
   .text-black {
     color: var(--color-black);
+  }
+  .text-green-500 {
+    color: var(--color-green-500);
+  }
+  .text-orange-600 {
+    color: var(--color-orange-600);
   }
   .text-white {
     color: var(--color-white);
