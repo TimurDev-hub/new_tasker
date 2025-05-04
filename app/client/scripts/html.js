@@ -39,13 +39,14 @@ export class Html {
 
 	static regForm() {
 		return `
-			<div class="bg-blue-300 w-fit rounded-md mt-20 mx-auto" id="logForm">
+			<div class="bg-blue-300 w-fit rounded-md mt-20 mx-auto">
 				<form autocomplete="on" accept-charset="UTF-8">
-					<fieldset class="flex flex-col" name="registrationFieldset">
+					<fieldset class="flex flex-col">
 						<legend class="text-white mx-auto inline-block h-fit bg-blue-700 rounded-t-md w-full text-center text-5xl font-medium p-4 mb-8">Registration</legend>
-						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="user_name" placeholder="Your username..." maxlength="20">
-						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-10 outline-none" type="password" name="user_password" placeholder="Your password..." maxlength="20">
+						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="user_name" placeholder="Your username..." maxlength="16">
+						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-10 outline-none" type="password" name="user_password" placeholder="Your password..." maxlength="16">
 						<input class="bg-green-500 transition duration-250 hover:bg-green-600 rounded-md p-2 text-4xl font-medium w-80 mx-auto mb-10" type="submit" value="Create">
+						<div id="messageArea"></div>
 					</fieldset>
 				</form>
 			</div>
@@ -55,13 +56,14 @@ export class Html {
 
 	static logForm() {
 		return `
-			<div class="bg-blue-300 w-fit rounded-md mt-20 mx-auto" id="logForm">
+			<div class="bg-blue-300 w-fit rounded-md mt-20 mx-auto">
 				<form autocomplete="on" accept-charset="UTF-8">
-					<fieldset class="flex flex-col" name="logingFieldset">
+					<fieldset class="flex flex-col">
 						<legend class="text-white mx-auto inline-block h-fit bg-blue-700 rounded-t-md w-full text-center text-5xl font-medium p-4 mb-8">Log in account</legend>
-						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="user_name" placeholder="Your username..." maxlength="20">
-						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-10 outline-none" type="password" name="user_password" placeholder="Your password..." maxlength="20">
+						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="user_name" placeholder="Your username..." maxlength="16">
+						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-10 outline-none" type="password" name="user_password" placeholder="Your password..." maxlength="16">
 						<input class="bg-green-500 transition duration-250 hover:bg-green-600 rounded-md p-2 text-4xl font-medium w-80 mx-auto mb-10" type="submit" value="Enter">
+						<div id="messageArea"></div>
 					</fieldset>
 				</form>
 			</div>

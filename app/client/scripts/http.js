@@ -1,35 +1,35 @@
 export class Http {
 	static async get(uri) {
-		const response = await fetch(uri, {
+		const request = await fetch(uri, { // await, т.к fetch всегда возвращает promise;
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		});
-		const responseData = await response.json();
-		return responseData;
+		const answer = await request.json();
+		return answer;
 	}
 
 	static async post(uri, jsonData) {
-		const response = await fetch(uri, {
+		const request = await fetch(uri, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: jsonData
 		});
-		const responseData = await response.json();
-		return responseData;
+		const answer = await request.json();
+		return answer;
 	}
 
 	static async delete(uri) {
-		const response = await fetch(uri, {
+		const request = await fetch(uri, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		});
-		const responseData = await response.json();
-		return responseData;
+		const answer = await request.json();
+		return answer;
 	}
 }
