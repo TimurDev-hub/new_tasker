@@ -20,6 +20,10 @@ class App {
 		document.querySelector('#logBtn').addEventListener('click', App.renderLogin);
 		document.querySelector('#regBtn').addEventListener('click', App.renderRegister);
 	}
+
+	static renderTaskArea() {
+		App.root.innerHTML = Html.userHeader() + Html.createArea() + Html.footer();
+	}
 	
 	static async registration(event) {
 		event.preventDefault();
@@ -63,10 +67,10 @@ class App {
 		const user_id = Utils.getCookieValue('user_id');
 		const user_name = Utils.getCookieValue('user_name');
 
-		if (!user_id || !user_name) {
+		if (user_id || user_name) {
 			this.renderLogin();
 		} else {
-			
+			this.renderTaskArea();
 		}
 	}
 }
