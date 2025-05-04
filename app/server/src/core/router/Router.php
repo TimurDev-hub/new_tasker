@@ -7,19 +7,20 @@ use Controllers\BaseController;
 
 final class Router
 {
-	public const HANDLER = 'handler'; // Константы много-где будут к месту;
+	public const HANDLER = 'handler'; // Константы много-где будут к месту, напоминание для себя-любимого;
 	public const METHOD = 'method';
 
 	private array $routes = [];
 
 	public function setRoute(string $httpMethod, string $uri, array $request): void
 	{
-		[self::HANDLER => $handlerClass, self::METHOD => $method] = $request; // Деструктуризация ассоциативного массива;
+		// Деструктуризация ассоциативного массива, классная штука. Вот кстати и пригодились константы;
+		[self::HANDLER => $handlerClass, self::METHOD => $method] = $request;
 
 		if (!class_exists($handlerClass)) throw new \InvalidArgumentException("Controller '$handlerClass' doesn`t exist!");
 
 		$this->routes["$httpMethod $uri"] = [
-			self::HANDLER => new $handlerClass(), // При создании объектов лучше всегда указывать скобки;
+			self::HANDLER => new $handlerClass(), // При создании объектов лучше всегда указывать скобки, чтоб не объебаться потом лишний раз;
 			self::METHOD => $method
 		];
 	}
@@ -39,7 +40,8 @@ final class Router
 
 			if (!isset($this->routes[$routeKey])) throw new \InvalidArgumentException("Route '$routeKey' doesn`t exist!");
 
-			[self::HANDLER => $controller, self::METHOD => $method] = $this->routes[$routeKey]; // Деструктуризация ассоциативного массива;
+			// Снова деструктуризация ассоциативного массива, хочу для себя сделать акцент на использование констант в таком ключе - здорово ведь;
+			[self::HANDLER => $controller, self::METHOD => $method] = $this->routes[$routeKey];
 
 			if (!$controller instanceof BaseController) throw new \InvalidArgumentException("Controller '$controller' doesn`t correct!");
 			if (!method_exists($controller, $method)) throw new \InvalidArgumentException("Method '$method' doesn`t exist in controller '$controller'!");
