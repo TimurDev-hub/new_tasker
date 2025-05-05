@@ -36,7 +36,7 @@ final class AuthController extends BaseController
 		try {
 			$user = new UserModel(pdo: Database::connection());
 
-			if (!$user->validateSpaces(data: $data)) {
+			if ($user->validateSpaces(data: $data)) {
 				http_response_code(400);
 				return json_encode([
 					'reload' => false,
@@ -64,8 +64,8 @@ final class AuthController extends BaseController
 
 			$cookie_domain = $_SERVER['HTTP_HOST'];
 
-			setcookie('user_id', $guest['user_id'], time() + 3600, '/', $cookie_domain);
-			setcookie('user_name', $guest['user_name'], time() + 3600, '/', $cookie_domain);
+			setcookie('user_id', (string) $guest['user_id'], time() + 3600, '/', $cookie_domain);
+			setcookie('user_name', (string) $guest['user_name'], time() + 3600, '/', $cookie_domain);
 
 			http_response_code(200);
 			return json_encode([
