@@ -28,13 +28,13 @@ export class Html {
 				<div>
 					<ul class="flex">
 						<li>
-							<button id="logBtn" class="inline-block px-6 py-2 bg-green-600 text-3xl text-white font-medium rounded-lg mx-4">${user}</button>
+							<button class="inline-block px-6 py-2 bg-green-600 text-3xl text-white font-medium rounded-lg mx-4">${user}</button>
 						</li>
 						<li>
-							<button id="logBtn" class="inline-block px-6 py-2 bg-yellow-300 transition duration-250 hover:bg-yellow-600 text-3xl text-black font-medium rounded-lg mx-4">Logout</button>
+							<button id="outBtn" class="inline-block px-6 py-2 bg-yellow-300 transition duration-250 hover:bg-yellow-600 text-3xl text-black font-medium rounded-lg mx-4">Logout</button>
 						</li>
 						<li>
-							<button id="regBtn" class="inline-block px-6 py-2 bg-red-500 transition duration-250 hover:bg-red-700 text-3xl text-black font-medium rounded-lg mx-4">Delete</button>
+							<button id="delBtn" class="inline-block px-6 py-2 bg-red-500 transition duration-250 hover:bg-red-700 text-3xl text-black font-medium rounded-lg mx-4">Delete</button>
 						</li>
 					</ul>
 				</div>

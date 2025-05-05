@@ -23,6 +23,9 @@ class App {
 
 	static renderTaskArea() {
 		App.root.innerHTML = Html.userHeader() + Html.createArea() + Html.footer();
+
+		//document.querySelector('#outBtn').addEventListener('click', );
+		//document.querySelector('#delBtn').addEventListener('click', );
 	}
 	
 	static async registration(event) {
@@ -67,7 +70,7 @@ class App {
 		const user_id = Utils.getCookieValue('user_id');
 		const user_name = Utils.getCookieValue('user_name');
 
-		if (user_id || user_name) {
+		if (!user_id || !user_name) {
 			this.renderLogin();
 		} else {
 			this.renderTaskArea();
