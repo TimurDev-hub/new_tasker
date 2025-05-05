@@ -22,7 +22,8 @@ class App {
 	}
 
 	static renderTaskArea() {
-		App.root.innerHTML = Html.userHeader() + Html.createArea() + Html.footer();
+		const user_name = Utils.getCookieValue('user_name');
+		App.root.innerHTML = Html.userHeader(user_name) + Html.createArea() + Html.footer();
 
 		document.querySelector('#outBtn').addEventListener('click', App.logout);
 		document.querySelector('#delBtn').addEventListener('click', App.deleteUser);
@@ -76,7 +77,7 @@ class App {
 
 	static async deleteUser() {
 		const user_id = Utils.getCookieValue('user_id');
-		const answer = await Http.delete(`/api/user/${user_id}`);
+		const answer = await Http.delete(`/api/user/${user_id}/del`);
 
 		if (answer.error !== undefined) Utils.renderError(answer.error);
 		else if (answer.reload === true) App.run();
