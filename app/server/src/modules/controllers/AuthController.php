@@ -105,7 +105,7 @@ final class AuthController extends BaseController
 			http_response_code(500);
 			return json_encode([
 				'reload' => false,
-				'error' => 'Internal Server Error'
+				'error' => 'Failed to logout the account'
 			]);
 		}
 	}

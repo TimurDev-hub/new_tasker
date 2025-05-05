@@ -14,8 +14,7 @@ final class Router
 
 	public function setRoute(string $httpMethod, string $uri, array $request): void
 	{
-		// Деструктуризация ассоциативного массива, классная штука. Вот кстати и пригодились константы;
-		[self::HANDLER => $handlerClass, self::METHOD => $method] = $request;
+		[self::HANDLER => $handlerClass, self::METHOD => $method] = $request; // Деструктуризация ассоциативного массива, классная штука. Вот кстати и пригодились константы;
 
 		if (!class_exists($handlerClass)) throw new \InvalidArgumentException("Controller '$handlerClass' doesn`t exist!");
 
@@ -38,10 +37,15 @@ final class Router
 			$path = $this->parseUri(uri: $uri);
 			$routeKey = "$httpMethod $path";
 
-			if (!isset($this->routes[$routeKey])) throw new \InvalidArgumentException("Route '$routeKey' doesn`t exist!");
+			if (!isset($this->routes[$routeKey])) {
+				if (preg_match('/^DELETE\s\/api\/auth\/[0-9]+$/s', $routeKey)) $routeKey = 'DELETE /api/auth/{id}';
+				elseif (preg_match('/^DELETE\s\/api\/user\/[0-9]+\/del$/s', $routeKey)) $routeKey = 'DELETE /api/user/{id}';
+				elseif (preg_match('/^DELETE\s\/api\/task(\/\w+){2}$/s', $routeKey)) $routeKey = 'DELETE /api/task/{user}/{task}';
+				elseif (preg_match('/^GET\s\/api\/task\/[0-9]+$/s', $routeKey)) $routeKey = 'GET /api/task/{id}';
+				else throw new \InvalidArgumentException("Route '$routeKey' doesn`t exist!");
+			}
 
-			// Снова деструктуризация ассоциативного массива, хочу для себя сделать акцент на использование констант в таком ключе - здорово ведь;
-			[self::HANDLER => $controller, self::METHOD => $method] = $this->routes[$routeKey];
+			[self::HANDLER => $controller, self::METHOD => $method] = $this->routes[$routeKey]; // Снова деструктуризация ассоциативного массива, хочу для себя сделать акцент на использование констант в таком ключе - здорово ведь;
 
 			if (!$controller instanceof BaseController) throw new \InvalidArgumentException("Controller '$controller' doesn`t correct!");
 			if (!method_exists($controller, $method)) throw new \InvalidArgumentException("Method '$method' doesn`t exist in controller '$controller'!");
@@ -56,25 +60,5 @@ final class Router
 				'error' => '404. Not found'
 			]);
 		}
-	}
-
-	public function dumpObject(): void
-	{
-		echo '<b>ROUTER:</b> <br>';
-		print_r($this);
-	}
-
-	public function dumpRoute(string $httpMethod, string $uri): void
-	{
-		$path = $this->parseUri(uri: $uri);
-		$routeKey = "$httpMethod $path";
-		if (!isset($this->routes[$routeKey])) throw new \InvalidArgumentException("$routeKey doesn`t exist!");
-		echo '<b>ROUTE:</b> <br>';
-		print_r($this->routes[$routeKey]);
-		[self::HANDLER => $controller, self::METHOD => $method] = $this->routes[$routeKey];
-		echo '<b>CONTROLLER:</b> <br>';
-		print_r($controller);
-		echo '<b>METHOD:</b> <br>';
-		echo $method;
 	}
 }

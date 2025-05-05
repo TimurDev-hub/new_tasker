@@ -76,8 +76,38 @@ final class UserController extends BaseController
 		}
 	}
 
-	public function delete(): void
+	public function delete(string $uri): string
 	{
-		return;
+		try {
+			$data = explode('/', $uri);
+			$id = $data[count($data) - 2];
+
+			$user = new UserModel(pdo: Database::connection());
+
+			if (!$user->deleteAccount(userId: (int) $id)) {
+				http_response_code(400);
+				return json_encode([
+					'reload' => false,
+					'error' => 'Failed to delete account'
+				]);
+			}
+
+			$cookie_domain = $_SERVER['HTTP_HOST'];
+			@setcookie('user_id', '', time() - 3600, '/', $cookie_domain);
+			@setcookie('user_name', '', time() - 3600, '/', $cookie_domain);
+
+			http_response_code(200);
+			return json_encode([
+				'reload' => true
+			]);
+
+		} catch (\Exception $exc) {
+			Logger::handleError(exc: $exc, file: Logger::USER_FILE);
+			http_response_code(500);
+			return json_encode([
+				'reload' => false,
+				'error' => 'Internal Server Error'
+			]);
+		}
 	}
 }

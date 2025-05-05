@@ -16,9 +16,9 @@ final class UserModel
 	public function validateSpaces(array $data): bool
 	{
 		foreach ($data as $item) {
-			if (str_contains($item, ' ')) return false;
+			if (str_contains($item, ' ')) return true;
 		}
-		return true;
+		return false;
 	}
 
 	public function findAccount(string $username): bool
@@ -48,7 +48,7 @@ final class UserModel
 		}
 	}
 
-	public function loginAccount(string $username): bool
+	public function loginAccount(string $username): array|false
 	{
 		try {
 			$stmt = $this->pdo->prepare("SELECT user_id, user_name, user_password FROM users WHERE user_name = ? LIMIT 1");
