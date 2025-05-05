@@ -24,8 +24,8 @@ class App {
 	static renderTaskArea() {
 		App.root.innerHTML = Html.userHeader() + Html.createArea() + Html.footer();
 
-		//document.querySelector('#outBtn').addEventListener('click', );
-		//document.querySelector('#delBtn').addEventListener('click', );
+		document.querySelector('#outBtn').addEventListener('click', App.logout);
+		document.querySelector('#delBtn').addEventListener('click', App.deleteUser);
 	}
 	
 	static async registration(event) {
@@ -61,6 +61,22 @@ class App {
 
 		const json = JSON.stringify(data);
 		const answer = await Http.post('/api/auth', json);
+
+		if (answer.error !== undefined) Utils.renderError(answer.error);
+		else if (answer.reload === true) App.run();
+	}
+
+	static async logout() {
+		const user_id = Utils.getCookieValue('user_id');
+		const answer = await Http.delete(`/api/auth/${user_id}`);
+
+		if (answer.error !== undefined) Utils.renderError(answer.error);
+		else if (answer.reload === true) App.run();
+	}
+
+	static async deleteUser() {
+		const user_id = Utils.getCookieValue('user_id');
+		const answer = await Http.delete(`/api/user/${user_id}`);
 
 		if (answer.error !== undefined) Utils.renderError(answer.error);
 		else if (answer.reload === true) App.run();

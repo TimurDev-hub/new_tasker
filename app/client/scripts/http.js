@@ -24,10 +24,7 @@ export class Http {
 
 	static async delete(uri) {
 		const request = await fetch(uri, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json'
-			}
+			method: 'DELETE'
 		});
 		const answer = await request.json();
 		return answer;

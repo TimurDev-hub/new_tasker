@@ -97,7 +97,7 @@ export class Html {
 					<fieldset class="flex flex-col">
 						<legend class="text-white mx-auto inline-block h-fit bg-blue-700 rounded-t-md w-full text-center text-5xl font-medium p-4 mb-8">Create task</legend>
 						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="task_title" placeholder="Title..." maxlength="16" required>
-						<textarea resize-none class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-10 outline-none" name="task_content" placeholder="Main text..." maxlength="109" required rows=3></textarea>
+						<textarea resize-none class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-10 outline-none" name="task_content" placeholder="Main text..." maxlength="100" required rows=3></textarea>
 						<input class="bg-green-500 transition duration-250 hover:bg-green-600 rounded-md p-2 text-4xl font-medium w-80 mx-auto mb-10" type="submit" value="Create">
 						<div id="messageArea"></div>
 					</fieldset>
