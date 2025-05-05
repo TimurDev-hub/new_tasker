@@ -47,8 +47,8 @@ abstract class BaseController
 	{
 		$clearedData = [];
 
-		foreach ($data as $string) {
-			$clearedData[] = htmlspecialchars(trim($string));
+		foreach ($data as $key => $value) {
+			$clearedData[$key] = htmlspecialchars(trim($value));
 		}
 
 		return $clearedData;
