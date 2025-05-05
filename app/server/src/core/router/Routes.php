@@ -37,6 +37,6 @@ $router->setRoute(httpMethod: 'DELETE', uri: '/api/task/{user}/{task}', request:
 ]);
 
 $router->setRoute(httpMethod: 'DELETE', uri: '/api/user/{id}', request: [
-	Router::HANDLER => AuthController::class,
+	Router::HANDLER => UserController::class,
 	Router::METHOD => 'delete'
 ]);
