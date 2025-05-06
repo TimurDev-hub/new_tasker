@@ -80,7 +80,7 @@ final class UserController extends BaseController
 	{
 		try {
 			$data = explode('/', $uri);
-			$id = $data[count($data) - 2];
+			$id = $data[count($data) - 1];
 
 			$user = new UserModel(pdo: Database::connection());
 
