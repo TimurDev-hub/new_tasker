@@ -13,7 +13,7 @@ final class TaskModel
 		$this->pdo = $pdo;
 	}
 
-	public function countTasks(int $userId): int|false
+	public function countTasks(int $userId): int
 	{
 		try {
 			$stmt = $this->pdo->prepare("SELECT COUNT(task_id) FROM tasks WHERE user_id = ?");
@@ -22,7 +22,7 @@ final class TaskModel
 
 		} catch (\PDOException $exc) {
 			Logger::handleError(exc: $exc, file: Logger::TASK_FILE);
-			return false;
+			throw $exc;
 		}
 	}
 
@@ -34,11 +34,11 @@ final class TaskModel
 
 		} catch (\PDOException $exc) {
 			Logger::handleError(exc: $exc, file: Logger::TASK_FILE);
-			return false;
+			throw $exc;
 		}
 	}
 
-	public function getTasks(int $userId): array|false
+	public function getTasks(int $userId): array
 	{
 		try {
 			$stmt = $this->pdo->prepare("SELECT task_id, task_title, task_content WHERE user_id = ?");
@@ -47,7 +47,7 @@ final class TaskModel
 
 		} catch (\PDOException $exc) {
 			Logger::handleError(exc: $exc, file: Logger::TASK_FILE);
-			return false;
+			throw $exc;
 		}
 	}
 
@@ -59,7 +59,7 @@ final class TaskModel
 
 		} catch (\PDOException $exc) {
 			Logger::handleError(exc: $exc, file: Logger::TASK_FILE);
-			return false;
+			throw $exc;
 		}
 	}
 }
