@@ -29,6 +29,26 @@ final class Router
 		return parse_url(trim($uri), \PHP_URL_PATH);
 	}
 
+	private function uriPatternToRegex(string $uriPattern): string
+	{
+		$pattern = str_replace('/', '\\/', $uriPattern);
+		$pattern = preg_replace('/{\w+}/', '\w+', $pattern);
+		return '/^' . $pattern . '$/s';
+	}
+
+	private function findMatchingRoute(string $httpMethod, string $uri): ?string
+	{
+		foreach (array_keys($this->routes) as $routeKey) {
+			list($routeHttpMethod, $routeUriPattern) = explode(' ', $routeKey, 2);
+			if ($httpMethod !== $routeHttpMethod) continue;
+
+			$pattern = $this->uriPatternToRegex(uriPattern: $routeUriPattern);
+			if (preg_match($pattern, $uri)) return $routeKey;
+		}
+
+		return null;
+	}
+
 	public function dispatchRoutes(string $httpMethod, string $uri): void
 	{
 		header("Content-Type: application/json");
@@ -38,11 +58,8 @@ final class Router
 			$routeKey = "$httpMethod $path";
 
 			if (!isset($this->routes[$routeKey])) {
-				if (preg_match('/^DELETE\s\/api\/auth\/[0-9]+$/s', $routeKey)) $routeKey = 'DELETE /api/auth/{id}';
-				elseif (preg_match('/^DELETE\s\/api\/user\/[0-9]+\/del$/s', $routeKey)) $routeKey = 'DELETE /api/user/{id}';
-				elseif (preg_match('/^DELETE\s\/api\/task(\/\w+){2}$/s', $routeKey)) $routeKey = 'DELETE /api/task/{user}/{task}';
-				elseif (preg_match('/^GET\s\/api\/task\/[0-9]+$/s', $routeKey)) $routeKey = 'GET /api/task/{id}';
-				else throw new \InvalidArgumentException("Route '$routeKey' doesn`t exist!");
+				$route = $this->findMatchingRoute(httpMethod: $httpMethod, uri: $path) ?? throw new \InvalidArgumentException("Route '$routeKey' doesn`t exist!");
+				$routeKey = $route;
 			}
 
 			[self::HANDLER => $controller, self::METHOD => $method] = $this->routes[$routeKey]; // Снова деструктуризация ассоциативного массива, хочу для себя сделать акцент на использование констант в таком ключе - здорово ведь;
