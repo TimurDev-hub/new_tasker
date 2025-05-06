@@ -86,9 +86,10 @@ final class AuthController extends BaseController
 	{
 		try {
 			$data = explode('/', $uri);
-			$id = $data[count($data) - 1];
+			$id = (int) $data[count($data) - 1];
 
-			if ($_COOKIE['user_id'] !== $id) throw new \Exception('Invalid cookie');
+			if (!$this->validateId(data: [$id])) throw new \InvalidArgumentException('Invalid User ID');
+			if ((int) $_COOKIE['user_id'] !== $id) throw new \InvalidArgumentException('Invalid Cookie');
 
 			$cookie_domain = $_SERVER['HTTP_HOST'];
 
