@@ -80,11 +80,14 @@ final class UserController extends BaseController
 	{
 		try {
 			$data = explode('/', $uri);
-			$id = $data[count($data) - 1];
+			$id = (int) $data[count($data) - 1];
+
+			if (!$this->validateId(data: [$id])) throw new \InvalidArgumentException('Invalid User ID');
+			if ((int) $_COOKIE['user_id'] !== $id) throw new \InvalidArgumentException('Invalid Cookie');
 
 			$user = new UserModel(pdo: Database::connection());
 
-			if (!$user->deleteAccount(userId: (int) $id)) {
+			if (!$user->deleteAccount(userId: $id)) {
 				http_response_code(400);
 				return json_encode([
 					'reload' => false,
