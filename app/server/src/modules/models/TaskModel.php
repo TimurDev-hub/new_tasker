@@ -41,7 +41,7 @@ final class TaskModel
 	public function getTasks(int $userId): array
 	{
 		try {
-			$stmt = $this->pdo->prepare("SELECT task_id, task_title, task_content WHERE user_id = ?");
+			$stmt = $this->pdo->prepare("SELECT task_id, task_title, task_content FROM tasks WHERE user_id = ?");
 			$stmt->execute([$userId]);
 			return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
