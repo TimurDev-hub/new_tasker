@@ -51,7 +51,7 @@ final class Router
 
 	public function dispatchRoutes(string $httpMethod, string $uri): void
 	{
-		header("Content-Type: application/json");
+		header("Content-Type: application/json"); // Важно;
 
 		try {
 			$path = $this->parseUri(uri: $uri);
@@ -69,7 +69,7 @@ final class Router
 
 			echo $controller->$method($path);
 
-		} catch (\Exception $exc) {
+		} catch (\Throwable $exc) {
 			Logger::handleError(exc: $exc, file: Logger::ROUTER_FILE);
 			http_response_code(404);
 			echo json_encode([
