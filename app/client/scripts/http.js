@@ -1,10 +1,7 @@
 export class Http {
 	static async get(uri) {
 		const request = await fetch(uri, { // await, т.к fetch всегда возвращает promise;
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
+			method: 'GET'
 		});
 		const answer = await request.json();
 		return answer;
