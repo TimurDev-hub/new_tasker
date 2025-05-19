@@ -19,7 +19,7 @@ export class Html {
 		`;
 	}
 
-	static userHeader(user) {
+	static userHeader(user = null) {
 		return `
 			<header class="flex justify-between items-center w-full bg-zinc-700 mt-4 rounded-2xl px-12 py-4">
 				<span class="inline-block mx-4 text-5xl text-white font-medium">
@@ -59,7 +59,7 @@ export class Html {
 	static regForm() {
 		return `
 			<div class="bg-blue-300 w-fit rounded-md mt-20 mx-auto">
-				<form autocomplete="on" accept-charset="UTF-8">
+				<form autocomplete="on" accept-charset="UTF-8" id="regForm">
 					<fieldset class="flex flex-col">
 						<legend class="text-white mx-auto inline-block h-fit bg-blue-700 rounded-t-md w-full text-center text-5xl font-medium p-4 mb-8">Registration</legend>
 						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="user_name" placeholder="Your username..." maxlength="16" required>
@@ -76,7 +76,7 @@ export class Html {
 	static logForm() {
 		return `
 			<div class="bg-blue-300 w-fit rounded-md mt-20 mx-auto">
-				<form autocomplete="on" accept-charset="UTF-8">
+				<form autocomplete="on" accept-charset="UTF-8" id="logForm">
 					<fieldset class="flex flex-col">
 						<legend class="text-white mx-auto inline-block h-fit bg-blue-700 rounded-t-md w-full text-center text-5xl font-medium p-4 mb-8">Log in account</legend>
 						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="user_name" placeholder="Your username..." maxlength="16" required>
@@ -90,28 +90,58 @@ export class Html {
 		`;
 	}
 
-	static createArea() {
+	static taskArea() {
 		return `
-			<div class="bg-blue-300 w-fit rounded-md mt-20 mx-auto">
-				<form autocomplete="off" accept-charset="UTF-8">
-					<fieldset class="flex flex-col">
-						<legend class="text-white mx-auto inline-block h-fit bg-blue-700 rounded-t-md w-full text-center text-5xl font-medium p-4 mb-8">Create task</legend>
-						<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="task_title" placeholder="Title..." maxlength="16" required>
-						<textarea resize-none class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-10 outline-none" name="task_content" placeholder="Main text..." maxlength="100" required rows=3></textarea>
-						<input class="bg-green-500 transition duration-250 hover:bg-green-600 rounded-md p-2 text-4xl font-medium w-80 mx-auto mb-10" type="submit" value="Create">
-						<div id="messageArea"></div>
-					</fieldset>
-				</form>
+			<div id="taskWrapArea" class="flex justify-around w-full mt-20 mx-auto">
+
+				<div class="bg-blue-300 w-fit rounded-md">
+					<form autocomplete="off" accept-charset="UTF-8" id="createForm">
+						<fieldset class="flex flex-col">
+							<legend class="text-white mx-auto inline-block h-fit bg-blue-700 rounded-t-md w-full text-center text-5xl font-medium p-4 mb-8">Create task</legend>
+							<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="task_title" placeholder="Title..." maxlength="16" required>
+							<textarea resize-none class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-10 outline-none" name="task_content" placeholder="Main text..." maxlength="100" required rows=3></textarea>
+							<input class="bg-green-500 transition duration-250 hover:bg-green-600 rounded-md p-2 text-4xl font-medium w-80 mx-auto mb-10" type="submit" value="Create">
+							<div id="messageArea"></div>
+						</fieldset>
+					</form>
+				</div>
+
 			</div>
 			<div class="flex flex-[1_0_auto]"></div>
 		`;
 	}
 
-	static tasksArea() {
-		return ``;
+	/*
+	static tasksList() {
+		return `
+			<div class="bg-blue-300 w-fit rounded-md">
+				<div class="text-white mx-auto inline-block h-fit bg-blue-700 rounded-t-md w-full text-center text-5xl font-medium p-4 mb-8">Your tasks</div>
+				<div id="taskArea" class="flex flex-col overflow-y-auto h-80 overflow-x-hidden">
+				</div>
+			</div>
+		`;
+	}
+	*/
+
+	static tasksList() {
+		return `
+			<div id="tasksContainer" class="bg-blue-300 w-fit rounded-md">
+				<div class="text-white mx-auto inline-block h-fit bg-blue-700 rounded-t-md w-full text-center text-5xl font-medium p-4 mb-8">Your tasks</div>
+				<div id="taskArea" class="flex flex-col overflow-y-auto h-80 overflow-x-hidden"></div>
+			</div>
+		`;
 	}
 
-	static task() {
-		return ``;
+	static task(title = null, content = null, id = null) {
+		return `
+			<form autocomplete="off" accept-charset="UTF-8" class="w-full bg-blue-200 mb-2 py-2">
+				<fieldset class="flex flex-col">
+					<input class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-6 outline-none" type="text" name="task_title" value="${title ?? 'Empty title'}" maxlength="16" required disabled>
+					<textarea resize-none class="bg-white mx-12 rounded-md px-4 py-2 w-100 text-3xl mb-10 outline-none" name="task_content" maxlength="100" required disabled rows=3>${content ?? 'Empty content'}</textarea>
+					<input name="loaded_task_id" type="text" value="${id}" hidden required disabled>
+					<input class="bg-red-500 transition duration-250 hover:bg-red-700 rounded-md p-2 text-4xl text-black font-medium w-80 mx-auto mb-10" type="submit" value="Delete">
+				</fieldset>
+			</form>
+		`;
 	}
 }
