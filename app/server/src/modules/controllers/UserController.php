@@ -11,6 +11,10 @@ final class UserController extends BaseController
 	private const MIN_DATA_LEN = 4;
 	private const MAX_DATA_LEN = 16;
 
+	/**
+	 * @param '/api/user'
+	 * @return string;
+	*/
 	public function create(?string $uri = null): string
 	{
 		$data = $this->getClientData();
@@ -76,6 +80,10 @@ final class UserController extends BaseController
 		}
 	}
 
+	/**
+	 * @param '/api/user/{id}'
+	 * @return string;
+	*/
 	public function delete(string $uri): string
 	{
 		try {

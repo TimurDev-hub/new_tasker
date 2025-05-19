@@ -13,6 +13,10 @@ final class TaskController extends BaseController
 	private const MAX_CONTENT_LEN = 100;
 	private const MAX_TASKS_VAL = 5;
 
+	/**
+	 * @param '/api/task'
+	 * @return string;
+	*/
 	public function create(?string $uri = null): string
 	{
 		$data = $this->getClientData();
@@ -80,6 +84,10 @@ final class TaskController extends BaseController
 		}
 	}
 
+	/**
+	 * @param '/api/task/{id}'
+	 * @return array;
+	*/
 	public function index(string $uri): string
 	{
 		try {
@@ -108,6 +116,10 @@ final class TaskController extends BaseController
 		}
 	}
 
+	/**
+	 * @param '/api/task/{user}/{task}'
+	 * @return string;
+	*/
 	public function delete(string $uri): string
 	{
 		$data = explode('/', $uri);

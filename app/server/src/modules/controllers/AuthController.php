@@ -11,6 +11,10 @@ final class AuthController extends BaseController
 	private const MIN_DATA_LEN = 4;
 	private const MAX_DATA_LEN = 16;
 
+	/**
+	 * @param '/api/auth'
+	 * @return string;
+	*/
 	public function create(?string $uri = null): string
 	{
 		$data = $this->getClientData();
@@ -82,6 +86,10 @@ final class AuthController extends BaseController
 		}
 	}
 
+	/**
+	 * @param '/api/auth/{id}'
+	 * @return string;
+	*/
 	public function delete(string $uri): string
 	{
 		try {

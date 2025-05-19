@@ -37,7 +37,6 @@ abstract class BaseController
 		foreach ($data as $string) {
 			if (!is_string($string) && !is_numeric($string)) return false;
 			if (!preg_match('/^\w+$/s', $string)) return false;
-			if (trim($string) === '') return false;
 		}
 
 		return true;
