@@ -7,12 +7,10 @@ use Router\Router;
 $uri = $_SERVER['REQUEST_URI'];
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 
-$router = new Router();
-
 try {
 	require_once __DIR__ . '/../src/core/router/Routes.php';
 
-	if (strpos($uri, '/api') !== false && strpos($uri, '/api') === 0) $router->dispatchRoutes(uri: $uri, httpMethod: $httpMethod);
+	if (strpos($uri, '/api') !== false && strpos($uri, '/api') === 0) Router::getInstance()->dispatchRoutes(uri: $uri, httpMethod: $httpMethod);
 	else require_once __DIR__ . '/../../client/view/index.html';
 
 } catch (\Throwable) {
