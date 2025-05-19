@@ -2,7 +2,7 @@
 
 # Instructions:
 1. Make sure you have up-to-date versions of PHP, Composer, Node.js, PostgreSQL installed;
-2. Copy the repository: `https://github.com/TimurDev-hub/new_tasker.git`;
+2. Copy the repository: `git clone https://github.com/TimurDev-hub/new_tasker.git`;
 3. Install PHP dependencies: `composer install`;
 4. Install Node.js dependencies: `npm install`;
 5. Create a `.env` file in the root of your project with the following contents:
