@@ -51,7 +51,7 @@ final class TaskController extends BaseController
 		try {
 			$task = new TaskModel(pdo: Database::connection());
 
-			if ($task->countTasks(userId: $userId) > self::MAX_TASKS_VAL) {
+			if ($task->countTasks(userId: $userId) >= self::MAX_TASKS_VAL) {
 				http_response_code(400);
 				return json_encode([
 					'reload' => false,
