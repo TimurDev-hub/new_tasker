@@ -37,8 +37,7 @@ final class TaskController extends BaseController
 				'reload' => false,
 				'error' => 'Title must be between 4 and 16 in length.'
 			]);
-		}
-		if (!$this->checkSize(data: [$data['task_content']], min: self::MIN_DATA_LEN, max: self::MAX_CONTENT_LEN)) {
+		} elseif (!$this->checkSize(data: [$data['task_content']], min: self::MIN_DATA_LEN, max: self::MAX_CONTENT_LEN)) {
 			http_response_code(400);
 			return json_encode([
 				'reload' => false,
@@ -47,7 +46,7 @@ final class TaskController extends BaseController
 		}
 
 		$userId = (int) $_COOKIE['user_id'];
-		if (!isset($userId)) return json_encode(['reload' => true]);
+		if (!$userId) return json_encode(['reload' => true]);
 
 		try {
 			$task = new TaskModel(pdo: Database::connection());
