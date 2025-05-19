@@ -17,7 +17,7 @@
 	task_id SERIAL PRIMARY KEY,
 	user_id SMALLINT NOT NULL,
 	task_title VARCHAR(16) NOT NULL,
-	task_text VARCHAR(100) NOT NULL
+	task_content VARCHAR(100) NOT NULL
 	);
 	```
 8. Create table **users**:
