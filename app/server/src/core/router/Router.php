@@ -10,7 +10,17 @@ final class Router
 	public const HANDLER = 'handler'; // Константы много-где будут к месту, напоминание для себя-любимого;
 	public const METHOD = 'method';
 
+	private static ?Router $router = null;
 	private array $routes = [];
+
+	private function __construct() {}
+	private function __clone() {}
+
+	public static function getInstance(): Router
+	{
+		self::$router ??= new Router();
+		return self::$router;
+	}
 
 	public function setRoute(string $httpMethod, string $uri, array $request): void
 	{
